@@ -50,6 +50,11 @@ no-reply email):
 
 Git email: commits in this repo use the GitHub no-reply email.
 
+Companion skill (separate private repo): spacekut/api-tests-from-ticket-skill
+  Turns a ticket's requirements into API tests. Generic, written from
+  scratch, and trialled once on a made-up ticket against a public fake API.
+  It is not part of this repo.
+
 
 ======================================================================
 3. HOW SOMEONE USES IT
