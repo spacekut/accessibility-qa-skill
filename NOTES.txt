@@ -1,0 +1,181 @@
+ACCESSIBILITY QA SKILL - NOTES
+Date: 2026-11-05
+What we built and how it was tested, in plain language.
+
+======================================================================
+TL;DR
+======================================================================
+- We built a Claude Code "skill" that guides a basic accessibility check
+  on a web page.
+- It lives in your private GitHub repo:
+  https://github.com/spacekut/accessibility-qa-skill
+- It has one worked example, run on a public page (Blind Text Generator).
+- It is a STARTER baseline, not a full WCAG audit and not a compliance
+  certificate.
+
+
+======================================================================
+1. WHAT IT IS
+======================================================================
+A skill is a markdown file (SKILL.md) that tells Claude Code how to do a
+particular job. This one tells Claude how to run a beginner-friendly
+accessibility baseline:
+
+  - what can be AUTOMATED (axe-core scan, names/roles, contrast numbers)
+  - what must be checked BY HAND (keyboard, screen reader, zoom, colour cues)
+  - how to RECORD the results honestly (Pass / Issue / Not verified / Not run)
+
+It follows WCAG 2.2 AA, using the W3C page as the reference:
+https://www.w3.org/WAI/standards-guidelines/wcag/
+
+
+======================================================================
+2. WHERE EVERYTHING LIVES
+======================================================================
+GitHub repo : spacekut/accessibility-qa-skill  (PRIVATE, 0 forks)
+Local copy  : ~/accessibility-qa-skill
+
+Files in the repo:
+  .claude/skills/accessibility-qa/SKILL.md   the skill itself
+  README.md                                  how to install and use it
+  NOTES.txt                                  this file
+  examples/2026-11-05-blindtextgenerator-baseline.md   the worked report
+  examples/evidence/blindtext-focus-link.png           one screenshot
+
+Git history before this file was added (3 commits, authored with the GitHub
+no-reply email):
+  d1cec65  Add accessibility-qa Claude Code skill
+  45b1dfc  Document usage and a no-Claude path in the README
+  42d85f7  Require the scenario table as the report format
+
+Git email: commits in this repo use the GitHub no-reply email.
+
+
+======================================================================
+3. HOW SOMEONE USES IT
+======================================================================
+WITH Claude Code
+  1. Copy the folder .claude/skills/accessibility-qa/ into a project's
+     .claude/skills/  (or into ~/.claude/skills/ to use it everywhere).
+  2. Start a NEW Claude Code session.
+  3. Ask in plain language, for example:
+       "Run an accessibility baseline on https://example.com/checkout"
+       "Do a keyboard test on this page"
+  4. Live browser checks need a Playwright MCP server. Without one, the
+     skill gives commands and marks them "Not run".
+
+WITHOUT Claude Code
+  The file does nothing by itself, but the method works as a checklist:
+    Automated scan  -> axe DevTools extension or the axe command-line tool
+    Keyboard pass   -> Tab, Shift+Tab, Enter, Space, Escape, arrow keys
+    Screen reader   -> a person with VoiceOver (Cmd+F5 on a Mac)
+    Contrast        -> browser DevTools or any contrast checker
+    Report          -> copy the table from the example report
+  (We did not try the axe extension or command-line tool ourselves.)
+
+
+======================================================================
+4. HOW THE SKILL WORKS (THE 8 STEPS)
+======================================================================
+  1. Scope       page, one task, states, browser, desktop/mobile
+  2. Standards   WCAG 2.2 AA; look criteria up before citing them
+  3. Automated   run axe etc. only if tools exist; never pretend
+  4. Keyboard    one real task, Tab order, focus, Enter/Escape, no trap
+  5. Screen reader   spot-check the same journey (needs a person)
+  6. Contrast / visual   colour not the only cue, zoom, reflow
+  7. Record      table + findings with evidence
+  8. Next steps  a few high-impact ones, not a giant list
+
+THE REPORT TABLE (required, exactly three columns)
+  | Test Scenarios | Test Steps | Test Result |
+
+Every Test Result starts with ONE of these:
+  Pass              the check was run and met expectations
+  Issue (F#)        reproduced or measured in the page; F# = finding number
+  Not verified (F#) suspected from code or a scan, not reproduced
+  Not run           not executed (for example no screen reader)
+
+KEY RULES (guardrails)
+  - Never claim a test was run unless it was.
+  - A clean axe result does NOT mean the page is accessible.
+  - Do not claim full WCAG conformance from a limited check.
+  - Prefer plain HTML and native controls over extra ARIA.
+  - Do not call a mismatch a defect until intended behaviour is confirmed.
+  - Clean up browser artifacts afterwards (screenshots, snapshots, logs).
+
+
+======================================================================
+5. THE WORKED EXAMPLE (BLIND TEXT GENERATOR)
+======================================================================
+Page: https://www.blindtextgenerator.com/lorem-ipsum  (public)
+Run : Chromium via Playwright, desktop, plus a 320px reflow check.
+
+CONFIRMED
+  F1  The words-count field has no label (axe: critical).
+  F2  The page does not reflow at 320px (width 960, no viewport meta tag).
+  F3  The second tab stop (the "Russian" language link) is off-screen and
+      shows no visible focus.
+
+SUSPECTED, NEEDS A MANUAL RETEST (read from the page code)
+  F4  The copy-to-clipboard control is an image with a click handler, not
+      reachable by keyboard.
+  F5  No landmarks, no skip link, five visible h1 headings.
+  F6  The "Text copied" message has no live region.
+  F7  Many small touch targets (axe said 20; not confirmed).
+
+NOT DONE
+  - Screen reader pass.
+  - Contrast (axe left 21 text elements undecided).
+  - Generating other texts, other pages, real mobile devices.
+
+
+======================================================================
+6. TESTING THE SKILL ITSELF (DEMOS)
+======================================================================
+We started a separate Claude Code session in a throwaway project, installed
+the skill there, and gave it a prompt like a new user would.
+
+DEMO 1 (before the table was tightened)
+  - The skill was invoked (confirmed in the session transcript).
+  - It matched our findings on the label, the reflow and the missing skip
+    link, and it was careful about what it had not verified.
+  - It called the logo link "unnamed", which our run showed is wrong (the
+    image has alt text). It said it had not checked the alt text.
+  - It reported 9 small targets; we got 20. It used a newer axe version
+    (4.14.0 vs 4.10.2). We did not investigate the difference.
+  - It did NOT use the exact required table.
+
+DEMO 2 (after the table was tightened, repo commit 42d85f7)
+  - The skill was invoked (confirmed in the session transcript).
+  - It used the required three-column table, and its results used the
+    required values (Pass / Issue / Not verified / Not run, with F# links).
+    So the tightening worked.
+  - It stayed honest: it listed what it did not run (screen reader,
+    contrast, zoom, the actual copy step), said it had not looked up W3C
+    criteria so it cited no numbers, and wrote no files as asked.
+  - Weaker points:
+      * It reported "a skip link exists, just not in the first 4 stops".
+        We checked: that link is a "[î] Top" back-to-top link at the
+        bottom of the page, NOT a skip link. The repo's example report
+        ("no skip link found") is still correct. The demo hedged it as
+        "not verified", but the claim was still wrong.
+      * It again called the first link "unnamed" (our run showed it is
+        named by the logo's alt text), and again said "9 small targets"
+        (we got 20; newer axe version).
+      * It did not find the off-screen "Russian" link we found (F3). It
+        only said focus visibility was "not verified".
+      * One row has a slightly odd result ("Not verified (F2)" for the
+        scan while F1 was confirmed). Allowed by the rules, but untidy.
+  - Takeaway: the format now holds up. Accuracy of individual findings
+    still depends on how deep each run goes, which is why the skill labels
+    anything not reproduced as "Not verified".
+
+
+======================================================================
+7. WHAT WAS NOT VERIFIED (BE HONEST ABOUT THIS)
+======================================================================
+  - No screen reader was used at any point.
+  - The axe browser extension and command-line tool were never tried.
+  - WCAG criterion numbers other than 1.4.3 and 1.4.11 were not looked up;
+    the skill tells users to confirm them in the W3C Quick Reference.
+  - The skill has only been tested on one public page.
