@@ -271,7 +271,17 @@ TRIAL RESULT (2026-11-05)
     expected values were worked out by arithmetic and not confirmed.
   - After the trial the skill was tightened for both (rows on an unread
     fix must be named "Neighbour (assumed):", derived values must be
-    labelled and listed as open questions). That change has NOT been
-    re-run.
+    labelled and listed as open questions).
+  - RE-RUN on the same bug (2026-11-05): the unread-fix problem is fixed.
+    The row was named "Neighbour (assumed):", the run said it had not
+    read the fix, and traceability said so. Derived values (19.00, 45.00,
+    18.00 for a single code) were labelled derived and unconfirmed and
+    collected under a "Derived values" heading.
+  - Bonus: it noticed 16.00 does not match "10% applied twice" (that
+    would be 16.20) and asked the dev. That inconsistency came from the
+    made-up ticket's own numbers, not from a planted trap.
+  - One small gap remains: the derived values were not repeated in the
+    open questions, as the skill asks. Still all "Not run", no side taken
+    on the expected total, no files written.
   - Not exercised: reading a real fix, running the scenarios, a real
     tracker, bugs with screenshots or logs.
