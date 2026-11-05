@@ -193,6 +193,10 @@ A generic skill, written from scratch. It turns a ticket's requirements
 into API regression tests. Trialled once on a made-up ticket against a
 public fake API. Not yet tried on a real ticket.
 
+Before a first real run, go through PREP-CHECKLIST.md in that repo. It
+covers permission, the ticket, where endpoints come from, the test
+environment, credentials, what to check afterwards, and red flags.
+
 QUICK START
   1. Install: copy .claude/skills/api-tests-from-ticket/ into a project's
      .claude/skills/ (or ~/.claude/skills/). Start a new Claude Code
