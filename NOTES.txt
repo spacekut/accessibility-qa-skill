@@ -295,5 +295,9 @@ TRIAL RESULT (2026-11-05)
     a stated rule, not a derived value, which is arguable.
   - This is one run and runs vary, so treat it as encouraging, not
     proven.
+  - To address the missed question, the skill now says any inconsistency
+    noticed (numbers that do not match the stated cause, or two comments
+    that disagree) must be raised as an open question, not only noted in
+    a table cell. This change has NOT been re-run, so it is untested.
   - Not exercised: reading a real fix, running the scenarios, a real
     tracker, bugs with screenshots or logs.
