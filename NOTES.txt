@@ -238,7 +238,12 @@ Repo: spacekut/bug-to-test-scenarios-skill  (PRIVATE)
 A generic skill, written from scratch. It turns one bug report into a
 small set of test scenarios: reproduce the bug, verify the fix, variants
 of the same cause, neighbouring behaviour, and "does not break" checks.
-Trialled once on a made-up bug. Not yet tried on a real bug.
+Trialled several times on one made-up bug. Not yet tried on a real bug.
+
+Before a first real run, go through PREP-CHECKLIST.md in that repo. To
+show someone the skill in a few minutes, follow DEMO.md there. It
+includes the made-up bug, the prompt, what a good result looks like,
+and the limits.
 
 QUICK START
   1. Install: copy .claude/skills/bug-to-test-scenarios/ into a project's
