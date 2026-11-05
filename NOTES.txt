@@ -298,6 +298,14 @@ TRIAL RESULT (2026-11-05)
   - To address the missed question, the skill now says any inconsistency
     noticed (numbers that do not match the stated cause, or two comments
     that disagree) must be raised as an open question, not only noted in
-    a table cell. This change has NOT been re-run, so it is untested.
+    a table cell.
+  - RE-RUN (2026-11-05): it worked. The 16.00 versus 16.20 mismatch was
+    raised as the first open question for the dev ("Is 16.00 a different
+    defect, a shipping charge, or a rounding or flat-amount effect?").
+    The earlier fixes held (a "Confirm derived values" line, the
+    "Neighbour (assumed):" row, "PR-7 was not read", the dev's cause
+    cited as "per the Dev comment"). All rows "Not run", no side taken on
+    the expected total, no files written. The scenario set changed a
+    little from earlier runs. One run, so encouraging, not proven.
   - Not exercised: reading a real fix, running the scenarios, a real
     tracker, bugs with screenshots or logs.
