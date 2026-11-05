@@ -284,7 +284,16 @@ TRIAL RESULT (2026-11-05)
     open questions, as the skill asks. Still all "Not run", no side taken
     on the expected total, no files written.
   - That gap was then closed in the skill (a required "Confirm derived
-    values" line under open questions). This last change has NOT been
-    re-run, so it is untested.
+    values" line under open questions).
+  - RE-RUN once more (2026-11-05): the open questions began with
+    "Confirm derived values:" and listed all three derived values. The
+    earlier fixes held, every row was "Not run", no side taken on the
+    expected total, no files written.
+  - Small differences, for honesty: it noticed 16.00 does not match "10%
+    applied twice" (16.20) but did NOT raise it as an open question for
+    the dev (the previous run did). It also called "SAVE10 alone = 18.00"
+    a stated rule, not a derived value, which is arguable.
+  - This is one run and runs vary, so treat it as encouraging, not
+    proven.
   - Not exercised: reading a real fix, running the scenarios, a real
     tracker, bugs with screenshots or logs.
