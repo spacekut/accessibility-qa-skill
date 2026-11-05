@@ -324,7 +324,9 @@ TRIAL RESULT (2026-11-05)
     so many words that nothing shown proves the bug is fixed; and a
     headless run cannot answer the review pause, so the skill stopped
     and asked for review (what the script says happens interactively).
-    Continuing past the pause was NOT tested. One run, so encouraging,
-    not proven.
+    Continuing past the pause was NOT tested. The script's closing-line
+    wording was afterwards changed to match what the skill says and to
+    note that the exact wording varies. One run, so encouraging, not
+    proven.
   - Not exercised: reading a real fix, running the scenarios, a real
     tracker, bugs with screenshots or logs.
