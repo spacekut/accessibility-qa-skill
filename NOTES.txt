@@ -312,5 +312,19 @@ TRIAL RESULT (2026-11-05)
     cited as "per the Dev comment"). All rows "Not run", no side taken on
     the expected total, no files written. The scenario set changed a
     little from earlier runs. One run, so encouraging, not proven.
+  - DEMO SCRIPT CHECK (2026-11-05): DEMO.md was followed as written, from
+    a fresh clone (bug text extracted from the script, the script's own
+    prompt). Every point under "What to point out" held: exact three-
+    column table, all rows "Not run", Support's 16.00 not decided,
+    PM/QA claims marked suspected, unread fix gave a "Neighbour
+    (assumed):" row and "per the comment" wording, the 16.00 vs 16.20
+    mismatch became an open question, derived values labelled with a
+    "Confirm derived values:" line, no files written.
+  - Two differences: the closing line asked for review and did not say in
+    so many words that nothing shown proves the bug is fixed; and a
+    headless run cannot answer the review pause, so the skill stopped
+    and asked for review (what the script says happens interactively).
+    Continuing past the pause was NOT tested. One run, so encouraging,
+    not proven.
   - Not exercised: reading a real fix, running the scenarios, a real
     tracker, bugs with screenshots or logs.
