@@ -14,7 +14,7 @@ Start a new Claude Code session after installing, then ask in plain language, fo
 
 The live browser checks need a Playwright MCP server available to Claude Code. Without one, the skill gives you the commands and steps and marks them as not run.
 
-A worked report is in [`examples/2026-11-05-blindtextgenerator-baseline.md`](examples/2026-11-05-blindtextgenerator-baseline.md).
+A worked report is in [`examples/2026-11-05-blindtextgenerator-baseline.md`](examples/2026-11-05-blindtextgenerator-baseline.md). For a plain-language summary of the skill, its example run and how it was tested, see [`NOTES.txt`](NOTES.txt).
 
 ## Using this without Claude
 
