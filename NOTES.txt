@@ -184,3 +184,45 @@ DEMO 2 (after the table was tightened, repo commit 42d85f7)
   - WCAG criterion numbers other than 1.4.3 and 1.4.11 were not looked up;
     the skill tells users to confirm them in the W3C Quick Reference.
   - The skill has only been tested on one public page.
+
+======================================================================
+8. COMPANION SKILL: API TESTS FROM A TICKET (QUICK START)
+======================================================================
+Repo: spacekut/api-tests-from-ticket-skill  (PRIVATE)
+A generic skill, written from scratch. It turns a ticket's requirements
+into API regression tests. Trialled once on a made-up ticket against a
+public fake API. Not yet tried on a real ticket.
+
+QUICK START
+  1. Install: copy .claude/skills/api-tests-from-ticket/ into a project's
+     .claude/skills/ (or ~/.claude/skills/). Start a new Claude Code
+     session.
+  2. Have the ticket text and a TEST environment URL ready. Never use
+     production.
+  3. Set credentials as environment variables (for example API_BASE_URL).
+     Do not paste secrets into the chat.
+  4. Ask: "Write API tests for TICKET-123".
+  5. Review the traceability table BEFORE it generates anything. This is
+     where you fix wrong assumptions.
+  6. Run the tests. The skill tells you the command. For Node it looks
+     like:
+       API_BASE_URL=https://your-test-env node --test path/to/tests.mjs
+  7. Read the results:
+       Pass          it ran and the assertion held
+       Fail          it ran and did not match. Could be a product bug, a
+                     wrong expectation in the ticket, or a test/data
+                     problem. The skill will not weaken an assertion to
+                     turn it green.
+       Blocked / Not run   something stopped it (for example missing
+                     credentials)
+  8. Keep the tests by committing them to your project's test folder.
+     The skill does not commit or push unless you ask.
+
+TRIAL RESULT (2026-11-05)
+  - 7 tests generated, 5 passed, 2 failed.
+  - Both failures were ticket-versus-environment mismatches (the fake API
+    has no auth, and DELETE returned 200 where a comment asked for 204).
+    They were reported as failures and the assertions were not weakened.
+  - Not exercised: the pause to review the table (the run was
+    non-interactive), cleanup of created data, real authentication, and a
+    real ticket tracker.
