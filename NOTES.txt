@@ -280,8 +280,11 @@ TRIAL RESULT (2026-11-05)
   - Bonus: it noticed 16.00 does not match "10% applied twice" (that
     would be 16.20) and asked the dev. That inconsistency came from the
     made-up ticket's own numbers, not from a planted trap.
-  - One small gap remains: the derived values were not repeated in the
+  - One small gap was left: the derived values were not repeated in the
     open questions, as the skill asks. Still all "Not run", no side taken
     on the expected total, no files written.
+  - That gap was then closed in the skill (a required "Confirm derived
+    values" line under open questions). This last change has NOT been
+    re-run, so it is untested.
   - Not exercised: reading a real fix, running the scenarios, a real
     tracker, bugs with screenshots or logs.
