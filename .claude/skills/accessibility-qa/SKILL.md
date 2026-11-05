@@ -17,7 +17,7 @@ A small, repeatable baseline for one page and one important user task. It is **n
 4. **Keyboard-only pass** on the task (below).
 5. **Screen-reader spot-check** on the same journey, if one is available for the tester's platform (e.g. VoiceOver on macOS).
 6. **Contrast and visual cues** for the actual affected states.
-7. **Record findings** with evidence and a status (see Evidence rules).
+7. **Record findings** with evidence and a status (see Evidence rules), and write the report in the format under Report format.
 8. **Recommend a few high-impact next steps**, not an exhaustive list, unless a full audit was requested.
 
 ## Example target page
@@ -39,7 +39,7 @@ Sample public page for practising this workflow: <https://www.blindtextgenerator
 
 ## Manual baseline
 
-Use this table for scenarios. Keep them simple, specific, and high-impact.
+Use this table for scenarios (the same table is the report, see Report format). Keep them simple, specific, and high-impact.
 
 | Test Scenarios | Test Steps | Test Result |
 |---|---|---|
@@ -77,6 +77,24 @@ Classify every item as exactly one of:
 - **Not verified / needs manual retest**: inferred from code or automation only, not run, or tool unavailable.
 
 For each finding, record: affected page/state; steps to reproduce; expected behaviour; observed behaviour; user impact; evidence (screenshot, tool output, recording, SR transcript); and whether it was **verified manually** or **only inferred from code/automation**.
+
+## Report format
+
+The report is the scenario table, filled in, followed by numbered findings. Use exactly these three columns and no others, with one row per check run or planned, automated checks included. Don't replace the table with a different table or a bullet list.
+
+| Test Scenarios | Test Steps | Test Result |
+|---|---|---|
+
+Start every **Test Result** with exactly one of these values, then a dash and a short piece of evidence:
+
+- `Pass`: the check was run and met expectations. (Evidence status: passed check.)
+- `Issue (F#)`: the problem was reproduced or measured in the page, not just reported by a tool. `F#` is the number of its finding below. (Evidence status: confirmed issue.) An axe violation counts only after you confirm it in the page, for example in the DOM or accessibility tree.
+- `Not verified (F#)`: suspected from code, a scan or an incomplete tool result, and not reproduced. Add `F#` when it has a finding. (Evidence status: not verified / needs manual retest.)
+- `Not run`: not executed, for example no screen reader was available.
+
+Keep cells short. Put the detail in the findings, not in the table.
+
+Order of the report: scope (page, task, state, platform, standard, what was not run), the table, findings `F1`, `F2`, ... with the fields from Evidence rules, a "Not verified" list, then next steps (a few, not exhaustive).
 
 ## Guardrails
 
